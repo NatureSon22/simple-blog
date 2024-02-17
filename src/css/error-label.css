@@ -1,0 +1,22 @@
+.error-label {
+    width: max-content;
+    padding: 2em 3em;
+    color: var(--txtmain-clr);
+    font-weight: 700;
+    border: 2px solid var(--bordererror-clr);
+    border-radius: 10px;
+    background-color: var(--border-clr);
+    box-shadow: rgb(39, 55, 73) 0px 20px 30px -10px;
+    position: fixed;
+    top: -5em;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: top 0.18s, opacity 0.18s;
+    z-index: 1;
+}
+
+.error-label.active {
+    top: 5em;
+    opacity: 1;
+}

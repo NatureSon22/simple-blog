@@ -1,0 +1,85 @@
+.blog-card {
+    min-height: 20em;
+    padding: 1.2em 1em;
+    background-color: var(--card-bg);
+    gap: 2em;
+    border: 2px solid var(--border-clr);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+
+    .profile {
+        width: 2.5em;
+        height: 2.5em;
+        margin-bottom: 1em;
+        border-radius: 50%;
+    }
+
+    .profile img {
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .title {
+        color: var(--txtmain-clr);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .date {
+        color: var(--txtsub-clr);
+    }
+
+    .banner {
+        height: 12em;
+    }
+
+    .banner-info {
+        margin-top: auto;
+    }
+
+    .banner-info p {
+        padding-inline: 0.5em;
+        font-size: 0.9rem;
+        margin-bottom: 1em;
+    }
+
+    .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .action-btn {
+        color: var(--txtsub-clr);
+        font-size: 1.1rem;
+    }
+
+    .action-btn:hover {
+        color: var(--txtmain-clr);
+        transition: color 0.18s;
+    }
+
+    &:hover {
+        border-color: var(--border-hover);
+    }
+}
+
+.blog-info {
+    padding-inline: 0.5em;
+
+    & p {
+        line-height: 1.2em;
+    }
+}
+
+.blog-actions {
+    padding-inline: 1em;
+
+    .upvotes {
+        gap: 0.7em;
+        color: var(--txtmain-clr);
+    }
+}

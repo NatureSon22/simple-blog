@@ -1,0 +1,14 @@
+.bloglist-container {
+    width: min(90%, 100em);
+    margin-block: 3em 4em;
+    align-self: flex-start;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 2em;
+}
+
+@media (min-width: 1400px) {
+    .bloglist-container {
+        grid-template-columns: repeat(4, minmax(15em, 1fr));
+    }
+}
+

@@ -1,0 +1,75 @@
+.blog-header {
+    padding: 2em 3em;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-clr);
+
+    & > p {
+        cursor: pointer;
+    }
+
+    & ul {
+        display: flex;
+        gap: 2em;
+    }
+
+    & li {
+        padding: 0.5em 1.2em;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .main-title {
+        color: var(--txtmain-clr);
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .starter-btn {
+        background-color: var(--card-bg);
+        color: var(--txtsub-clr);
+        font-weight: 700;
+    }
+
+    .starter-btn:hover {
+        color: var(--txtmain-clr);
+        transition: color 0.18s;
+    }
+
+    .create-btn {
+        background-color: var(--bordererror-clr);
+        color: var(--txtmain-clr);
+        transition: color 0.18s, background-color 0.18s;
+    }
+
+    .create-btn:hover {
+        background-color: var(--txtmain-clr);
+        color: var(--bordererror-clr);
+    }
+
+    .blogs-btn {
+        background-color: var(--card-bg);
+        color: var(--txtsub-clr);
+        transition: color 0.18s;
+    }
+
+    .blogs-btn:hover {
+        color: var(--txtmain-clr);
+    }
+
+    .out-btn {
+        border: 2px solid var(--txtsub-clr);
+        color: var(--txtsub-clr);
+    }
+}
+
+.header-logo {
+    gap: 0.3em;
+    cursor: pointer;
+
+    .logo {
+        color: var(--txtmain-clr);
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,131 @@
+.blog-container {
+    width: min(90%, 50em);
+    margin-block: 3em 5em;
+    font-size: 1.1rem;
+    gap: 2em;
+
+    .header {
+        gap: 1em;
+    }
+
+    .blog-banner {
+        height: 20em;
+
+        & img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    & img {
+        width: 100%;
+        display: block;
+        border-radius: 5px;
+    }
+
+    .blog-footer {
+        margin-top: 0;
+        gap: 1em;
+    }
+
+    .blog-upvote {
+        width: min-content;
+        color: var(--txtsub-clr);
+        gap: 1em;
+    }
+
+    .btn {
+        padding: 0.9em 2em;
+        font-weight: 700;
+        background-color: transparent;
+        border: 1px solid var(--bordererror-clr);
+        color: var(--bordererror-clr);
+        text-transform: uppercase;
+    }
+
+    .btn-vote {
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: color 0.18s;
+    }
+
+    .btn-vote:hover {
+        color: var(--txtmain-clr);
+    }
+}
+
+.header {
+    margin-bottom: 1.5em;
+
+    .user-action {
+        gap: 1em;
+    }
+
+    .user-action {
+        margin-left: auto;
+    }
+
+    & h1 {
+        font-size: 3rem;
+        color: var(--txtmain-clr);
+    }
+}
+
+.blog-author {
+    color: var(--txtsub-clr);
+    align-items: center;
+    gap: 1em;
+
+    .author-profile {
+        width: 3em;
+    }
+
+    img {
+        border-radius: 50%;
+    }
+}
+
+.blog-content {
+    color: var(--txtmain-clr);
+}
+
+.categories {
+    align-items: center;
+    gap: 2em;
+    flex-wrap: wrap;
+    color: var(--txtsub-clr);
+    background-color: transparent;
+
+    & > p {
+        font-weight: 700;
+    }
+
+    .list {
+        gap: 1.2em;
+    }
+
+    .category {
+        font-weight: 700;
+        padding: 0.5em 1em;
+        background-color: var(--card-bg);
+        border-radius: 5px;
+    }
+}
+
+.comments {
+    padding-top: 2em;
+    margin-top: 2em;
+    color: var(--txtsub-clr);
+    border-top: 2px solid var(--bordererror-clr);
+    text-align: center;
+}
+
+@media (min-width: 600px) {
+    .blog-container {
+        margin-block: 5em 9em;
+
+        .ql-editor {
+            font-size: 1.2rem;
+        }
+    }
+}

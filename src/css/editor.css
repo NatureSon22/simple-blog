@@ -1,0 +1,158 @@
+.editor-container {
+    width: min(90%, 70em);
+    margin-block: 3em 4em;
+    align-self: flex-start;
+    gap: 3em;
+
+    & h1 {
+        color: var(--txtmain-clr);
+    }
+
+    .editor-label {
+        gap: 2em;
+    }
+
+    .editor-title {
+        gap: 1em;
+        align-items: center;
+    }
+
+    .editor-image {
+        gap: 1.5em;
+        align-items: center;
+    }
+
+    .contain {
+        gap: 1em;
+    }
+
+    .title {
+        width: max-content;
+        color: var(--txtmain-clr);
+    }
+
+    .field-text {
+        width: 100%;
+        padding: 0.5em 0.7em;
+        font-size: 0.9rem;
+        background-color: transparent;
+        border: 1px solid var(--border-clr);
+        color: var(--txtmain-clr);
+    }
+
+    .field-img {
+        padding: 0.5em 0.7em;
+        flex: 1;
+        border: 1px solid var(--border-clr);
+    }
+
+    .starter-btn {
+        background-color: var(--card-bg);
+        color: var(--txtsub-clr);
+        font-weight: 700;
+    }
+
+    .starter-btn:hover {
+        color: var(--txtmain-clr);
+        transition: color 0.18s;
+    }
+
+    .main-btn {
+        padding: 1em 1.5em;
+        background-color: var(--main-bg);
+        color: var(--txtsub-clr);
+        border: 2px solid var(--border-hover);
+        font-family: inherit;
+        font-weight: 900;
+        text-transform: uppercase;
+        transition: all 0.18s;
+    }
+
+    .main-btn:hover {
+        background-color: var(--border-hover);
+        border-color: var(--main-bg);
+        color: var(--main-bg);
+    }
+
+    .out-btn {
+        padding-inline: 1.5em;
+        color: var(--txtsub-clr);
+        background-color: var(--card-bg);
+        text-transform: uppercase;
+        border: none;
+        font-weight: 700;
+        transition: color 0.18s;
+    }
+
+    .out-btn:hover {
+        color: var(--txtmain-clr);
+    }
+}
+
+.rich-editor {
+    width: 100%;
+
+    .ql-toolbar {
+        padding: 1em;
+        background-color: var(--txtmain-clr);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.2em;
+    }
+
+    .ql-editor {
+        font-size: 1rem;
+        min-height: 20em;
+        color: var(--txtmain-clr);
+    }
+
+    .ql-editor::before {
+        color: var(--txtsub-clr);
+    }
+    
+}
+
+.editor-actions {
+    gap: 2em;
+
+    & button:nth-child(1) {
+        margin-right: auto;
+    }
+}
+
+.categories {
+    padding: 0.5em;
+    background-color: var(--card-bg);
+}
+
+.category-list {
+    gap: 2em;
+
+    .list {
+        gap: 1.5em;
+        flex-wrap: wrap;
+    }
+
+    & select {
+        cursor: pointer;
+    }
+
+    .contain {
+        align-items: center;
+    }
+}
+
+.category-contain {
+    color: var(--txtsub-clr);
+    gap: 0.5em;
+    align-items: center;
+
+    & button {
+        background-color: var(--txtsub-clr);
+        padding: 0.4em 0.6em;
+        border: none;
+    }
+}
+
