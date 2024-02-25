@@ -19,6 +19,8 @@ const NavBar = ({setShowLogout}) => {
         setShowLogout(prev => !prev);
     }
 
+    console.log(logIn)
+
 
     return (
         <header className="blog-header">
@@ -27,9 +29,12 @@ const NavBar = ({setShowLogout}) => {
                 <p onClick={() => handleNavigate('/main')} className="main-title" >Blog</p>
             </div>
 
-            <button className="mobile-btn" onClick={() => setClick(!click)}>
-                <FontAwesomeIcon icon={faBars} ></FontAwesomeIcon>
-            </button>
+            {
+                logIn && 
+                <button className="mobile-btn" onClick={() => setClick(!click)}>
+                    <FontAwesomeIcon icon={faBars} ></FontAwesomeIcon>
+                </button>
+            }
 
             {
                 logIn ?
