@@ -11,6 +11,7 @@ import { v4 } from "uuid"
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore"
 import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 import { useUserContext } from "../components/UserProvider"
+import BgBorder from "../components/BgBorder"
 
 const CreateBlog = () => {
     const { getPosts, getChosenPost } = useUserContext();
@@ -18,13 +19,13 @@ const CreateBlog = () => {
     const [image, setImage] = useState('');
     const [categoryList, setCategoryList] = useState([]);
     const [body, setBody] = useState('');
+    const [ loading, setLoading ] = useState(false);
     const postCollectionRef = collection(db, "posts");
     const navigate = useNavigate();
     const { id } = useParams();
     const post = getChosenPost(id);
     const toUpdate = post ? true : false;
     const { showError, setLabel } = useOutletContext();
-
     useEffect(() => {
         if (!post) {
             return;
@@ -81,6 +82,7 @@ const CreateBlog = () => {
     }
 
     const saveDoc = async (action) => {
+        setLoading(prev => !prev);
         try {
             const errorMessage = checkInput();
             if (errorMessage) {
@@ -114,6 +116,8 @@ const CreateBlog = () => {
         } catch (error) {
             setLabel(error.message);
             showError();
+        } finally {
+            setLoading(prev => !prev);
         }
     };
 
@@ -122,44 +126,48 @@ const CreateBlog = () => {
     }
 
     return (
-        <div className="editor-container grid">
-            <h1>Create a Blog Post</h1>
-            <div className="editor-label grid">
-                <div className="editor-title flex">
-                    <p className="title">Title</p>
-                    <input className="field-text" type="text" placeholder="Title of the blog" onChange={handleTitle} value={title} />
-                </div>
-                <div className="editor-image flex">
-                    <p className="title">Banner Photo</p>
-                    <input className="field-img" type="file" onChange={handleImage} />
-                </div>
-                <div className="categories-container">
-                    <div className="category-list flex">
-                        <div className="flex contain title">
-                            <p>Categories</p>
-                            <Categories setCategoryList={setCategoryList} ></Categories>
-                        </div>
+        <>
+            { loading && <BgBorder></BgBorder> }
 
-                        <div className="flex list">
-                            {
-                                categoryList.length > 0 &&
-                                categoryList.map((category, index) => <CategoryContainer key={index} category={category} setCategoryList={setCategoryList} ></CategoryContainer> )
-                            }
+            <div className="editor-container grid">
+                <h1>Create a Blog Post</h1>
+                <div className="editor-label grid">
+                    <div className="editor-title flex">
+                        <p className="title">Title</p>
+                        <input className="field-text" type="text" placeholder="Title of the blog" onChange={handleTitle} value={title} />
+                    </div>
+                    <div className="editor-image flex">
+                        <p className="title">Banner Photo</p>
+                        <input className="field-img" type="file" onChange={handleImage} />
+                    </div>
+                    <div className="categories-container">
+                        <div className="category-list flex">
+                            <div className="flex contain title">
+                                <p>Categories</p>
+                                <Categories setCategoryList={setCategoryList} ></Categories>
+                            </div>
+
+                            <div className="flex list">
+                                {
+                                    categoryList.length > 0 &&
+                                    categoryList.map((category, index) => <CategoryContainer key={index} category={category} setCategoryList={setCategoryList} ></CategoryContainer> )
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="editor-form">
-                <ReactQuill modules={modules} theme="snow" className="rich-editor" placeholder="Write here..." onChange={handleBlogInputChange} value={body} />
-            </div>
+                <div className="editor-form">
+                    <ReactQuill modules={modules} theme="snow" className="rich-editor" placeholder="Write here..." onChange={handleBlogInputChange} value={body} />
+                </div>
 
-            <div className="editor-actions flex">
-                <button className="main-btn" onClick={() => saveDoc('publish')} >Publish</button>
-                <button className="out-btn" onClick={() => saveDoc('draft')} >Save as Draft</button>
-                <button className="out-btn" onClick={cancel} >Cancel</button>
+                <div className="editor-actions flex">
+                    <button className="main-btn" onClick={() => saveDoc('publish')} >Publish</button>
+                    <button className="out-btn" onClick={() => saveDoc('draft')} >Save as Draft</button>
+                    <button className="out-btn" onClick={cancel} >Cancel</button>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

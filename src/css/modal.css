@@ -1,0 +1,47 @@
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: var(--border-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+}
+
+.modal-message {
+    color: var(--txtmain-clr);
+    margin-bottom: 1.5em;
+}
+
+.modal {
+    width: min(80%, 18em);
+    background-color: var(--card-bg);
+    padding: 2em;
+    border-radius: 5px;
+    border: 1px solid var(--bordererror-clr);
+    text-align: center;
+}
+
+.modal-action {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+
+    & button {
+        font-size: 1rem;
+        padding: 0.5em 1em;
+        color: var(--txtmain-clr);
+        background-color: var(--border-clr);
+        border: none;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 500px) {
+    .modal {
+        width: 20em;
+        font-size: 1.2rem;
+    }
+}

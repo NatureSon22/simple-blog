@@ -6,7 +6,14 @@ const UserBlogs = () => {
     const filteredPosts = getUserPosts();
 
     return (
-        <BlogList filteredPosts={filteredPosts}></BlogList>
+        <> 
+            {
+                filteredPosts.length > 0 ? 
+                <BlogList filteredPosts={filteredPosts} forFilter="true" ></BlogList> 
+                :   
+                <p className="null-text">No blog posts were found...</p>
+            }
+        </>
     )
 }
 

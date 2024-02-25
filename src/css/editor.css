@@ -41,6 +41,8 @@
     }
 
     .field-img {
+        color: var(--txtmain-clr);
+        width: 100%;
         padding: 0.5em 0.7em;
         flex: 1;
         border: 1px solid var(--border-clr);
@@ -141,6 +143,11 @@
 
     .contain {
         align-items: center;
+    }
+
+    & option {
+        color: var(--card-bg);
+        cursor: pointer;
     }
 }
 

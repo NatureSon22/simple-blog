@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import CreateBlog from "./pages/CreateBlog"
 import UserBlogs from "./pages/UserBlogs"
 import Blog from "./pages/Blog"
+import UserProvider from "./components/UserProvider"
 
 function App() {
 
@@ -42,7 +43,9 @@ function App() {
   ])
 
   return (
-    <RouterProvider router={router} ></RouterProvider>
+    <UserProvider>
+       <RouterProvider router={router} ></RouterProvider>
+    </UserProvider>
   )
 }
 

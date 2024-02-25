@@ -1,6 +1,7 @@
 :root {
     --main-bg: #0E1217;
     --card-bg: #1C1F26;
+    --border-bg: hsla(213, 24%, 7%, 0.85);
 
     --txtmain-clr: #FFFFF1;
     --txtsub-clr: #A8B3CF;

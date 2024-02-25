@@ -1,7 +1,7 @@
 .blog-container {
     width: min(90%, 50em);
     margin-block: 3em 5em;
-    font-size: 1.1rem;
+    font-size: 1rem;
     gap: 2em;
 
     .header {
@@ -58,16 +58,15 @@
     margin-bottom: 1.5em;
 
     .user-action {
+        margin-left: auto;
         gap: 1em;
     }
 
-    .user-action {
-        margin-left: auto;
-    }
-
     & h1 {
+        padding-block: 0.5em;
         font-size: 3rem;
         color: var(--txtmain-clr);
+        line-height: 1.15em;
     }
 }
 
@@ -87,9 +86,16 @@
 
 .blog-content {
     color: var(--txtmain-clr);
+
+    .ql-syntax {
+        max-width: 25em;
+        overflow-x: scroll;
+        border: 1px solid var(--card-bg);
+    }
 }
 
 .categories {
+    width: 100%;
     align-items: center;
     gap: 2em;
     flex-wrap: wrap;
@@ -101,6 +107,7 @@
     }
 
     .list {
+        flex-wrap: wrap;
         gap: 1.2em;
     }
 
@@ -113,11 +120,22 @@
 }
 
 .comments {
+    width: 100%;
     padding-top: 2em;
     margin-top: 2em;
     color: var(--txtsub-clr);
     border-top: 2px solid var(--bordererror-clr);
     text-align: center;
+}
+
+@media (min-width: 500px) {
+    .blog-content {
+    
+        .ql-syntax {
+            max-width: 29em;
+        }
+    }
+    
 }
 
 @media (min-width: 600px) {
@@ -126,6 +144,15 @@
 
         .ql-editor {
             font-size: 1.2rem;
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    .blog-content {
+        .ql-syntax {
+           max-width: 100%;
+            overflow-x: hidden;
         }
     }
 }

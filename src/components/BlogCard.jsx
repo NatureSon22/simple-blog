@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUnion, collection, doc, increment, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, collection, doc, getDoc, increment, updateDoc } from "firebase/firestore";
 import "../css/blogcard.css"
 import { useUserContext } from "./UserProvider"
 import { db, auth } from "../config/firebase";
@@ -10,7 +10,6 @@ import { faThumbsUp, faShareSquare } from "@fortawesome/free-solid-svg-icons";
 const BlogCard = ({ post }) => {
     const { logIn, getPosts } = useUserContext();
     const { author, profile, title, date, photoBanner, upvotes, postId } = post
-    const [isUpvoted, setUpVote] = useState(true);
     const navigate = useNavigate();
     const collectionRef = collection(db, "posts");
     const { showError, setLabel } = useOutletContext();
@@ -37,15 +36,18 @@ const BlogCard = ({ post }) => {
         }
 
         try {
+            const docRef = doc(collectionRef, postId);
+            const docSnap = await getDoc(docRef);
+            const post = docSnap.data();
+            const alreadyVoted = post.upvoters.includes(auth.currentUser.uid);
+
             await updateDoc(doc(collectionRef, postId), {
                 ...post,
-                upvotes: !isUpvoted ? increment(1) : increment(-1),
-                upvoters: !isUpvoted ? arrayUnion(auth.currentUser.uid) : arrayRemove(auth.currentUser.uid)
+                upvotes: !alreadyVoted ? increment(1) : increment(-1),
+                upvoters: !alreadyVoted ? arrayUnion(auth.currentUser.uid) : arrayRemove(auth.currentUser.uid)
             });
             getPosts();
-            setUpVote(prev => !prev);
         } catch (e) {
-            console.log(e)
             setLabel("An error has occured");
             showError()
         }
@@ -60,12 +62,6 @@ const BlogCard = ({ post }) => {
 
         setLabel("This feature is not yet implemented");
         showError()
-
-        // try {
-        //     await navigator.clipboard.writeText(`http://localhost:5173/blog/chwaNeUeetY6b8hcY4sc`);
-        // } catch (error) {
-        //     console.log(error)
-        // }
     }
 
     return (

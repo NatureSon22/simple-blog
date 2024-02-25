@@ -9,6 +9,7 @@ import { db } from "../config/firebase"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
+import Modal from "../components/Modal"
 
 const Blog = () => {
     const { getChosenPost, getPosts } = useUserContext();
@@ -18,28 +19,33 @@ const Blog = () => {
     const { title, author, date, blogText, categories, photoBanner, profile, upvotes, postId} = post;
     const collectionRef = collection(db, 'posts');
     const { showError, setLabel } = useOutletContext();
+    const [showDelete, setShowDelete] = useState(false);
 
     const updateBlog = () => {
         navigate(`/update-blog/${id}`);
     }
 
+    const setDelete = () => {
+        setShowDelete(prev => !prev);
+    }
+
     const deleteBlog = async() => {
-        try {
-            alert('Do you really want to delete this blog?')
+         try {
             const collectionRef = collection(db, "posts");
             const docRef = doc(collectionRef, id);
             await deleteDoc(docRef);
             await getPosts();
-            navigate("/main");
             
+            navigate("/main");
         } catch(e) {
             console.log(e);
         }
     }
+    
 
     const upvoteBlog = async (action) => {
         if(author === auth.currentUser.displayName) {
-            setLabel('You cannot upvote your own blog!');
+            setLabel('You cannot upvote your own blog!')
             showError();
             return;
         }
@@ -47,55 +53,43 @@ const Blog = () => {
         try {
             const docRef = doc(collectionRef, postId);
             const docSnap = await getDoc(docRef);
-    
-            if (docSnap.exists()) {
-                const post = docSnap.data();
-                const upvoters = post.upvoters || [];
-    
-                const alreadyVoted = upvoters.includes(auth.currentUser.uid);
-    
-                let updatedUpvotes = post.upvotes || 0;
-                let updatedUpvoters = [...upvoters];
-    
-                if (action === "UP" && !alreadyVoted) {
-                    return;
-                } else if (action === "DOWN" && !alreadyVoted) {
-                    updatedUpvotes--;
-                    updatedUpvoters.push(auth.currentUser.uid);
-                }
-    
-                if (alreadyVoted && action === "UP") {
-                    updatedUpvotes++;
-                    updatedUpvoters = updatedUpvoters.filter(uid => uid !== auth.currentUser.uid);
-                }
-    
-                await updateDoc(docRef, {
-                    ...post,
-                    upvotes: updatedUpvotes,
-                    upvoters: updatedUpvoters
-                });
-    
-                getPosts(); // Assuming this function fetches and updates the list of posts
-            } else {
-                console.log("Document does not exist!");
+            const post = docSnap.data();
+            const alreadyVoted = post.upvoters.includes(auth.currentUser.uid);
+            
+            if ((alreadyVoted && action === 'UP') || (!alreadyVoted && action === 'DOWN')) {
+                return;
             }
-        } catch (error) {
-            console.error("Error upvoting/downvoting blog:", error);
+            
+            const voteAdd = action === 'UP' ? 1 : -1;
+            const upvoters = alreadyVoted ? post.upvoters.filter(voter => voter !== auth.currentUser.uid) : [...post.upvoters, auth.currentUser.uid];
+            
+            await updateDoc(docRef, {
+                ...post,
+                upvotes: post.upvotes + voteAdd,
+                upvoters: upvoters
+            });
+            
+            await getPosts();            
+        } catch(e) {
+            setLabel(e);
+            showError();
         }
     };
     
-    
-    
-
-
     return (
         <div className="blog-container grid">
+
+            {
+                // <Modal message="Do you want to log out?" showModal={showLogut} setShowModal={setShowLogout} onOK={handleSignout} ></Modal>
+                showDelete && <Modal message="Do you want to delete this blog?" showModal={showDelete} setShowModal={setShowDelete} onOK={deleteBlog} ></Modal>
+            }
+
             <div className="header flex col">
                 {
                     auth.currentUser?.displayName === author &&
                     <div className="flex user-action">
                         <button className="btn" onClick={updateBlog} >Update</button>
-                        <button className="btn" onClick={deleteBlog} >Delete</button>
+                        <button className="btn" onClick={setDelete} >Delete</button>
                     </div>
                 }
                 <h1>{title}</h1>

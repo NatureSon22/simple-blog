@@ -6,6 +6,10 @@
     gap: 2em;
 }
 
+.null-text {
+    color: var(--txtsub-clr)
+}
+
 @media (min-width: 1400px) {
     .bloglist-container {
         grid-template-columns: repeat(4, minmax(15em, 1fr));
